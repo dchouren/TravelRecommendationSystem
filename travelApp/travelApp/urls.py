@@ -2,14 +2,16 @@ from django.conf.urls import patterns, include, url
 
 from django.conf import settings
 from django.conf.urls.static import static
+# from djangular.views import DjangularModuleTemplateView
 
 from django.contrib import admin
 admin.autodiscover()
 
+
 urlpatterns = patterns('',
     # Examples:
-    url(r'^$', 'travel.views.home', name='home'),
-    url(r'^$', 'travel.views.search', name='search'),
+    url(r'^$', 'travel.views.index', name='index'),
+    url(r'^recommend$', 'travel.views.recommend', name='recommend'),
     url(r'^admin/', include(admin.site.urls)),
 )
 

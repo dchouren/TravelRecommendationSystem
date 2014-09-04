@@ -7,32 +7,22 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
-class Search(models.Model):
-	query = models.CharField(max_length=120, null=True, blank=True)
-	created_at = models.DateTimeField(auto_now_add=True)
-	# moderator = models.ForeignKey(User)
+# class Search(models.Model):
+# 	query = models.CharField(max_length=120, null=True, blank=True)
+# 	created_at = models.DateTimeField(auto_now_add=True)
+# 	# moderator = models.ForeignKey(User)
 
-	def __unicode__(self):
-		return smart_unicode(self.query)
-
-
-	# def get_valid_searches():
-	# 	all_cities = AllMembers
-
-	# 	return len(all_cities)
+# 	def __unicode__(self):
+# 		return smart_unicode(self.query)
 
 
+# 	# def get_valid_searches():
+# 	# 	all_cities = AllMembers
 
-# class SignUp(models.Model):
-# 	first_name = models.CharField(max_length=120, null=False, blank=False)
-# 	last_name = models.CharField(max_length=120, null=False, blank=False)
-# 	email = models.Email()
+# 	# 	return len(all_cities)
 
-
-
-# holds all of the cities in mc model
 class AllCities(models.Model):
-	cityString = models.CharField(max_length=120, unique=True, null=False, blank=False)
+	cityString = models.CharField(max_length=120, null=False, blank=False)
 
 	def __unicode__(self):
 		return smart_unicode(self.cityString)
@@ -40,13 +30,14 @@ class AllCities(models.Model):
 
 
 class AllMembers(models.Model):
-	member = models.CharField(max_length=120, unique=True, null=False, blank=False)
+	memberString = models.CharField(max_length=120, null=False, blank=False)
 
 	def __unicode__(self):
-		return smart_unicode(self.member)
+		return smart_unicode(self.memberString)
 
 
 
-class memberCityPairs(models.Model):
-	memberId = models.ForeignKey(AllMembers)
-	cityId = models.ForeignKey(AllCities)
+class MemberCityPairs(models.Model):
+	memberIndex = models.ForeignKey(AllMembers)
+	cityIndex = models.ForeignKey(AllCities)
+

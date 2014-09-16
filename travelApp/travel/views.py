@@ -18,49 +18,12 @@ def index(request):
 
 	searches = None
 	return render(request, 'index.html')
-	# searches = Search.objects.exclude(query__isnull=True)
-
-		# all_cities = AllCities.objects.all()
-
-		# # Search.get_valid_searches()
 
 
-		# valid_searches = []
-		# for p in searches:
-		#     for d in all_cities.filter(cityString=p.query):
-		#        valid_searches.append(d)
 
-		# left_searches = []
-		# right_searches = []
-
-		# for i in range(0, len(valid_searches)):
-		# 	if i % 2 == 0:
-		# 		left_searches.append(valid_searches[i])
-		# 	else:
-		# 		right_searches.append(valid_searches[i])
-
-		# if request.method == 'POST':
-		# 	searchform = SearchForm(request.POST)
-
-		# 	if searchform.is_valid():
-		# 		save_it = searchform.save(commit=False)
-		# 		save_it.save()
-
-		# 		this_search = [save_it.query]
-		# 		# messages.success(request, this_search)
-
-		# 		print 'same page'
-		# 		return HttpResponse(json.dumps({'this_search': this_search}))
-		# else:
-		# 	searchform = SearchForm(request.POST)
-		# 	print 'here'
-		# return render(request, 'search.html', {'searches': valid_searches,
-		# 	'searchform': searchform, 'left_searches': left_searches,
-		# 	'right_searches': right_searches, 'all_cities': all_cities})
 
 # @csrf_exempt
 def recommend(request):
-
 
 	citiesQuery = json.loads(request.body)
 	citiesVector = ""
@@ -69,13 +32,17 @@ def recommend(request):
 		cities = citiesQuery[i]
 		citiesVector += str(cities['text']) + "\n"
 
-	p1 = subprocess.Popen(['java', '-jar', 'TravelRecommender.jar',
+	recommender_jar = request.session.get('recommender_jar')
+	# if jar has not been started yet, actually start it
+	if not recommender_jar:
+		
+		request.session['recommender_jar'] = recommender_jar
+
+	recommender_jar = subprocess.Popen(['java', '-jar', 'TravelRecommender.jar',
 			citiesVector], stdout=subprocess.PIPE)
+	output = recommender_jar.communicate()[0]
 
-	output = p1.communicate()[0]
-	p1.kill
-
-	print output
+	# print output
 
 	cities_json = []
 	count = 0
@@ -99,7 +66,7 @@ def recommend(request):
 
 	# context = json.dumps({'recommendations': output})
 
-	print cities_json
+	# print cities_json
 	return HttpResponse(json.dumps(cities_json))
 	# r = requests.post('index', data=context)
 

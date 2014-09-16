@@ -49,7 +49,9 @@ INSTALLED_APPS = (
     'travel',
 )
 
-# TODO fix middleware problem
+# TODO fix middleware problem where posting returns a 403 error
+# works in chromium only... angular has some way to attach the
+# proper csrf tokens but not working for some reason
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

@@ -30,16 +30,20 @@ def recommend(request):
 
 	for i in range(0, len(citiesQuery)):
 		cities = citiesQuery[i]
-		citiesVector += str(cities['text']) + "\n"
+		citiesVector += str(cities['text']) + "\nPREDICT"
 
+	print citiesVector
 	recommender_jar = request.session.get('recommender_jar')
 	# if jar has not been started yet, actually start it
 	if not recommender_jar:
-		
+		print 'first time'
+		recommender_jar = subprocess.Popen(['java', '-jar', 'TravelRecommender.jar',
+			citiesVector], stdin=subpocess.PIPE, stdout=subprocess.PIPE)
 		request.session['recommender_jar'] = recommender_jar
 
-	recommender_jar = subprocess.Popen(['java', '-jar', 'TravelRecommender.jar',
-			citiesVector], stdout=subprocess.PIPE)
+	else:
+		recommender_jar.stdin.write(citiesVector);
+	
 	output = recommender_jar.communicate()[0]
 
 	# print output

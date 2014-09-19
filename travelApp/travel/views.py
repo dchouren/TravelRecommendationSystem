@@ -2,6 +2,7 @@ from itertools import chain
 import json
 import os
 import subprocess
+from subprocess import Popen, PIPE, STDOUT
 
 
 from django.conf import settings
@@ -26,27 +27,34 @@ def index(request):
 def recommend(request):
 
 	citiesQuery = json.loads(request.body)
-	citiesVector = ""
+	citiesVector = "NEXT SEARCH\n"
 
 	for i in range(0, len(citiesQuery)):
 		cities = citiesQuery[i]
-		citiesVector += str(cities['text']) + "\nPREDICT"
+		citiesVector += str(cities['text']) + "\n"
+
+	citiesVector += "PREDICT\n"
 
 	print citiesVector
-	recommender_jar = request.session.get('recommender_jar')
+	# recommender_jar = request.session.get('recommender_jar')
 	# if jar has not been started yet, actually start it
-	if not recommender_jar:
-		print 'first time'
-		recommender_jar = subprocess.Popen(['java', '-jar', 'TravelRecommender.jar',
-			citiesVector], stdin=subpocess.PIPE, stdout=subprocess.PIPE)
-		request.session['recommender_jar'] = recommender_jar
+	# if not recommender_jar:
+	# 	print 'first time'
+		
+	# 	request.session['recommender_jar'] = recommender_jar
 
-	else:
-		recommender_jar.stdin.write(citiesVector);
-	
-	output = recommender_jar.communicate()[0]
+	# else:
+	# 	recommender_jar.stdin.write(citiesVector);
+	recommender_jar = subprocess.Popen('java jar TravelRecommenderNonCyclic.jar',
+		stdin=subpocess.PIPE, stdout=subprocess.PIPE)
+	recommender_jar.communicate(input=citiesVector)[0]
+	# 
+	# recommender_jar.stdin.write(citiesVector)
+	# output = recommender_jar.communicate()[0]
 
-	# print output
+	print "output: "
+	print output
+	print "output end"
 
 	cities_json = []
 	count = 0
@@ -67,12 +75,5 @@ def recommend(request):
 			cities_json.append({'city': city})
 			count += 1
 		
-
-	# context = json.dumps({'recommendations': output})
-
 	# print cities_json
 	return HttpResponse(json.dumps(cities_json))
-	# r = requests.post('index', data=context)
-
-	# return render(request, 'index.html', context)
-	# return render_to_response('recommend.html', context)

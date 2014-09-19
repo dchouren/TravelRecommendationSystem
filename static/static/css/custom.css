@@ -1,12 +1,152 @@
-.jumbotron {
-	background-color: #438FF2;
+
+#background {
+	position:absolute;
+	height:100%;
+	width:100%;
+	margin:0;
+	background-color:#EAF7FF;
+	overflow-y:scroll;
 }
 
-.success {
-	background: grey;
-	text-align: center;
+#logo {
+	margin-top:9%;
+	width:100%;
+	text-align:center;
+	font-family:Roboto Slab, serif;
+	font-size:6.5em;
+	font-weight:300;
+	color:#67C5FF;
+	text-shadow:2px 2px #777777;
+	/*letter-spacing:-1; */
 }
+
+#searchContainer {
+	margin-top:17px;
+	width:100%;
+	text-align:center;
+}
+
+	#searchBarWrapper {
+		text-align:center;
+		margin:0 auto;
+		width:560px;  /* 15cm = 566.92px*/
+	}
+		#searchBox {
+			padding-left:0.3em;
+			font-family:Quicksand, sans-serif;
+			font-size:1.3em;
+			font-color:000000;
+			padding-bottom:-5px;
+			/*border-radius:0px;*/
+		}
+		#addButton {
+			background-color:#AAAAFF;
+			font-family:Quicksand, sans-serif;
+			/*border-radius:0px;*/
+		}
+
+	#recommendButtonWrapper {
+		width:100%;
+		margin-top:17px;
+		overflow:hidden;
+		text-align:center;
+	}
+		#recommendButton {
+			background-color:#FFF454;
+			margin:0 auto;
+			font-family:Quicksand, sans-serif;
+			font-weight:400;
+			/*color:#60608F;*/
+			/*border-radius:3px;*/
+			font-size:1.4em;
+		}
+
+	#numCities, #numRecs {
+		/*position:relative;*/
+		margin-top:34px;
+		font-family:Quicksand, sans-serif;
+		font-size:1.3em;
+		font-weight:0;
+		opacity:0.7;
+	}
+		#clearSelection{
+			display:inline;
+			margin-top:34px;
+			margin-left:17px;
+			font-family:Quicksand, sans-serif;
+			font-size:1em;
+			font-weight:700;
+		}
+
+	#submittedCities, #recommendedCities {
+		margin-top:34px;
+		white-space:wrap;
+		text-align:center;
+	}
+		#cityEntry, #recommendation {
+			margin-top:10px;
+			margin-bottom:10px;
+			margin-left:17px;
+			margin-right:17px;
+			font-family: Roboto Slab, serif;
+			font-size:1.7em;
+			font-weight:300;
+			display:inline;
+			line-height: 2em;
+		}
+
+/* 	#recommendedCities {
+	margin-top:34px;
+	white-space:wrap;
+	text-align:center;
+	height:100%;
+	width:100%;
+} */
+		/* #recommendation {
+			background-color:gray;
+			background-image:url(../../media/images/denali_1.jpg);
+			height:608px;
+			width:1080px;
+			margin:0 auto;
+			margin-top:34px;
+			font-family:Roboto Slab, serif;
+			font-size:1em;
+			font-weight:300;
+			display:inline;
+		} */
+
+
+/* PANORAMIO */
+	.map-canvas {
+	    height: 500px;
+	    width: 500px;
+	    margin:0 auto;
+	    padding: 0px
+	 }
+
+	#map-canvas {
+	    height: 500px;
+	    width: 500px;
+	    margin:0 auto;
+	    padding: 0px
+	 }
+
+	
+	#showMoreWrapper {
+		margin-top:136px;
+	}
+		#showMore {
+			font-family:Quicksand, sans-serif;
+			font-size:1.3em;
+			font-weight:400;
+		}
+
 
 #footer {
+	position:absolute;
+	margin-top:17px;
+	width:100%;
+	bottom:0;
 	text-align: center;
+	font-family:Quicksand, sans-serif;
 }

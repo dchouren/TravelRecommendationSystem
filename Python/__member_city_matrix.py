@@ -58,10 +58,6 @@ LARGE_FORUMS = [
     ]
 MEMBER_PAGE = "http://www.tripadvisor.com/members/"
 
-DROP_TABLE = "DROP TABLE city_sets"
-INSERT_DB = "INSERT INTO "
-
-
 # XXX refactor if time
 def scrape_wanted_cities(member, soup):
     """get wanted cities for member from BeautifulSoup parsed members page."""
@@ -118,10 +114,10 @@ def scrape_visited_cities(member):
     data = request.text
     soup = BeautifulSoup(data)
 
-    want_count = soup.find_all('span', class_='pin_counts pc_want')
+    # want_count = soup.find_all('span', class_='pin_counts pc_want')
 
-    if want_count != None and not re.search('(0)', str(want_count)):
-        scrape_wanted_cities(member, soup)
+    # if want_count != None and not re.search('(0)', str(want_count)):
+    #     scrape_wanted_cities(member, soup)
 
 
     # run through all the text in script tags
@@ -221,6 +217,8 @@ def readVisitedCities(member):
     beenCount = int(strippedBeen.replace(",", ""))
     if beenCount < 50:
         return None
+
+    all_members.append(member)
 
     # run through all the text in script tags
     for script_text in soup.find_all('script'):

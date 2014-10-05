@@ -27,14 +27,14 @@ def index(request):
 def recommend(request):
 
 	citiesQuery = json.loads(request.body)
-	# citiesVector = "NEXT SEARCH\n"
-	citiesVector = ""
+	citiesVector = "NEXT SEARCH\n"
+	# citiesVector = ""
 
 	for i in range(0, len(citiesQuery)):
 		cities = citiesQuery[i]
 		citiesVector += str(cities['text']) + "\n"
 
-	# citiesVector += "PREDICT\n"
+	citiesVector += "PREDICT\n"
 
 	print citiesVector
 	# recommender_jar = request.session.get('recommender_jar')
@@ -47,12 +47,12 @@ def recommend(request):
 	# else:
 	# 	recommender_jar.stdin.write(citiesVector);
 	
-	recommender_jar = subprocess.Popen(['java', '-jar', 'TravelRecommender.jar',
-			citiesVector], stdout=subprocess.PIPE)
-	output = recommender_jar.communicate()[0]
-	# 
-	# recommender_jar.stdin.write(citiesVector)
+	recommender_jar = subprocess.Popen(['java', '-jar', 'CyclicTravelRecommender.jar'
+		], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
 	# output = recommender_jar.communicate()[0]
+	
+	recommender_jar.stdin.write(citiesVector)
+	output = recommender_jar.communicate()[0]
 
 	print "output: "
 	print output

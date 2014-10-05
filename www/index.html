@@ -1,0 +1,100 @@
+<!doctype html>
+<html ng-app="travelRecommender">
+  <head>
+
+  <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Quicksand:400,700' rel='stylesheet' type='text/css'>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="./js/angular.min.js"></script>
+
+    <script src="./js/main.js"></script>
+
+    <script src="./js/jquery-2.1.1.min.js"></script>
+
+    <link rel="stylesheet" href="./css/custom.css">
+
+  </head>
+  <body>
+
+  <div id="background">
+    <div id="logo"><p>Recommender</p></div>
+
+    <!-- SEARCH BOX -->
+    <div ng-controller="travelController" id="searchContainer">
+      <form id="searchForm">
+
+        <div id="searchBarWrapper">
+          <!-- the search bar -->
+          <div class="input-group input-group-lg col-sm-4 col-sm-offset-4">
+            <!-- actual search box -->
+            <input type="textarea" class="form-control" id="searchBox" ng-model="cityText" placeholder="Add a location">
+
+            <!-- add button -->
+            <span class="input-group-btn">
+              <button class="btn btn-default btn-lg" type="button" ng-click="addCity()" id="addButton">Add</button>
+            </span>
+
+          </div>
+        </div>
+      </form>
+
+      <!-- Recommend Button -->
+      <div id="recommendButtonWrapper">
+          <button class="btn btn-default btn-lg" type="button" ng-click="recommend()" id="recommendButton">Recommend!</button>
+      </div>
+
+      <!-- Added X Locations -->
+      <div id="numCities">
+
+        <span>
+          <ng-pluralize count="cities.length"
+              when="{
+              1: 'Added 1 location',
+              'other':'Added {{cities.length}} locations'}">
+          </ng-pluralize>
+        </span>
+
+        <div id="clearSelection" ng-hide="cities.length==0"><a href="" ng-click="archive()">clear</a></div>
+
+      </div>
+
+      <!-- LIST OF CITIES -->
+      <div id="submittedCities" class="col-sm-12">
+
+          <p ng-repeat="city in cities" id="cityEntry">
+
+              <br ng:show="{{city.lineBreak}}==1" />
+              {{city.text}}
+              <button type="button" class="btn btn-link btn-xs" ng-click="deleteCity($index)"><span class="glyphicon glyphicon-remove"></span></button>
+          </p>
+
+      </div>
+    </div>
+
+
+    <div id="footer">
+        <p>&copy; TravelRecommenderCompany 2014</p>
+    </div>
+  </div>
+
+<script>
+// submit search on [Enter]
+$(document).ready(function() {
+    $('#searchBox').keydown(function(event) {
+        if (event.keyCode == 13) {
+            $('#addButton').click();
+            return false;
+         }
+    });
+});
+</script>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="./js/bootstrap.min.js"></script>
+  </body>
+</html>

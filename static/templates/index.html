@@ -1,0 +1,66 @@
+<!doctype html>
+<html ng-app="travelRecommender">
+  <head>
+
+    <!-- fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Quicksand:400,700' rel='stylesheet' type='text/css'>
+
+    <!-- js imports-->
+    <script src="static/js/imports/angular.min.js"></script>
+    <script src="static/js/imports/jquery-2.1.1.min.js"></script>
+
+    <!-- general js -->
+    <script src="static/js/helper.js"></script>
+    <!-- main angular module -->
+    <script src="static/js/angular/angularApp.js"></script>
+    <!-- angular controller -->
+    <script src="static/js/angular/travelRecommender.ctrl.js"></script>
+
+    <!-- panoramio -->
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=panoramio"></script>
+    <script src="https://ssl.panoramio.com/wapi/wapi.js?v=1"></script>
+    <script src="static/js/panoramio.js"></script>
+
+    <!-- CSS -->
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/custom.css">
+    <link rel="stylesheet" href="static/css/spinner.css">
+
+  </head>
+
+  <body>
+    <div id="background">
+
+      <!-- TRAVEL CONTROLLER-->
+      <div ng-controller="travelController" id="searchContainer">
+
+        {% include 'search_interface.html' %}
+          
+
+
+        <div ng-hide="recommendations.length > 0 || recommending == 1">
+          {% include 'searches.html' %}
+        </div>
+
+        <div ng-show="recommending == 1">
+          {% include 'spinner.html' %}
+        </div>
+
+        <div ng-show="recommendations.length > 0 && recommending != 1">
+          {% include 'recommendations.html' %}
+        </div>
+
+      </div> <!-- travelController, searchContainer -->
+
+      {% include 'footer.html' %}
+
+    </div> <!-- background -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="static/js/imports/bootstrap.min.js"></script>
+
+  </body>
+</html>

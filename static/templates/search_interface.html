@@ -1,0 +1,31 @@
+ <div id="logo"><p>Logo</p></div>
+
+    
+      <form id="searchForm">
+
+        <div id="searchBarWrapper">
+          <!-- the search bar -->
+          <div class="input-group input-group-md">
+            <!-- actual search box -->
+            <input type="textarea" autofocus angucomplete-alt class="form-control" id="searchBox" ng-model="cityText" placeholder="Add a location">
+
+              
+            <!-- add button -->
+            <span class="input-group-btn">
+            <button class="btn btn-default btn-md" type="button" ng-click="addCity()" id="addButton">Add</button>
+            </span>
+
+          </div>
+        </div>
+      </form>
+
+
+      <!-- Recommend Button -->
+      <div id="recommendButtonWrapper">
+          <a button class="btn btn-default btn-md" type="button" ng-click="recommend()" id="recommendButton">Recommend!</a>
+      </div>
+
+      <!-- Is this necessary? -->
+      <!-- <div id="errorMessages">
+        <p ng-show="duplicate == 1" id="duplicate">Location already added</p>
+      </div> -->

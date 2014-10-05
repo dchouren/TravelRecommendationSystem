@@ -1,0 +1,32 @@
+<!-- SEARCHING, DO NOT DISPLAY RECS -->
+      <div id="searching">
+
+        <!-- Added X Locations -->
+        <div id="numCities">
+          <span>
+          {%verbatim%}
+            <ng-pluralize count="cities.length"
+                when="{
+                1: 'Added 1 location',
+                'other':'Added {{cities.length}} locations'}">
+            </ng-pluralize>
+          {%endverbatim%}
+          </span>
+
+          <div id="clearSelection"  ng-show="cities.length > 0"><a href="" ng-click="clear()">clear</a></div>
+
+        </div>
+
+        <!-- CITIES QUERY -->
+        <div id="submittedCities" class="col-sm-12">
+            <p ng-repeat="city in cities" id="cityEntry">
+
+                {% verbatim %}
+                <br ng:show="{{city.lineBreak}}==1" />
+                {{city.text}}
+                {% endverbatim %}
+                <button type="button" class="btn btn-link btn-xs" ng-click="deleteCity($index)"><span class="glyphicon glyphicon-remove"></span></button>
+            </p>
+        </div>
+      </div> <!-- searching -->
+      

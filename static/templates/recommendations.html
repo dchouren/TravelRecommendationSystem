@@ -1,0 +1,48 @@
+{% block recommendations %}
+
+
+<!-- RECOMMENDATIONS, SHOW WHEN RECOMMENDING -->
+      <!-- <div id="recommendations" class="col-sm-12" > -->
+
+        <!-- X recommendations -->
+        <div id="numRecs">
+           <span>
+           {%verbatim%}
+             <ng-pluralize count="recommendations.length"
+                 when="{
+                 null: 'No recommendations, try another search!',
+                 0: 'No recommendations, try another search!',
+                 1: 'Found 1 recommendation',
+                 'other':'Found {{recommendations.length}} recommendations'}">
+             </ng-pluralize>
+           {%endverbatim%}
+           </span>
+
+          <div id="clearSelection" ><a href="" ng-click="clear()">clear</a></div>
+        </div> <!-- numRecs -->
+
+
+      <!-- </div> --> <!-- recommendations -->
+
+
+      <div id="recommendedCities" class="col-sm-12">
+        <div ng-repeat="rec in recommendations" id="recommendation">
+          {% verbatim %}
+            {{rec.city}}
+          {% endverbatim %}
+
+          <button type="button" class="btn btn-link btn-lg" ng-click="deleteRec($index)"><span class="glyphicon glyphicon-remove"></span></button>
+
+          <br/>
+          <!-- <div class="map-canvas" id="map-canvas"></div> -->
+
+        </div>
+      </div>
+
+      
+
+      <div id="showMoreWrapper">
+          <a href="" ng-click="" id="showMore">show more</a>
+      </div>
+
+{% endblock %}

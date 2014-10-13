@@ -37,26 +37,36 @@ def recommend(request):
 	citiesVector += "PREDICT\n"
 
 	print citiesVector
-	# recommender_jar = request.session.get('recommender_jar')
-	# if jar has not been started yet, actually start it
-	# if not recommender_jar:
+
+	# print "here"
+	# # if jar has not been started yet, actually start it
+	# if not 'recommender_jar' in request.session:
 	# 	print 'first time'
 		
-	# 	request.session['recommender_jar'] = recommender_jar
-
+	# 	request.session['recommender_jar'] = subprocess.Popen(['java', 
+	# 		'-jar', 'CyclicTravelRecommender.jar'
+	# 		], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+	# 	print "here2"
 	# else:
+	# 	print "here3"
 	# 	recommender_jar.stdin.write(citiesVector);
+	# 	print "here4"
 	
-	recommender_jar = subprocess.Popen(['java', '-jar', 'CyclicTravelRecommender.jar'
+	
+	recommender_jar = subprocess.Popen(['java', '-jar',
+		'TravelRecommender2.jar', citiesVector,
 		], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
 	# output = recommender_jar.communicate()[0]
 	
-	recommender_jar.stdin.write(citiesVector)
+	# recommender_jar.stdin.write(citiesVector)
+	# print "here5"
+	# recommender_jar = request.session.get('recommender_jar')
+
 	output = recommender_jar.communicate()[0]
 
-	print "output: "
+	# print "output: "
 	print output
-	print "output end"
+	# print "output end"
 
 	cities_json = []
 	count = 0
